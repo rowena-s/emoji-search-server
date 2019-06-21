@@ -10,7 +10,7 @@ var storage = multer.diskStorage({
   cb(null, 'public')
 },
 filename: function (req, file, cb) {
-  cb(null, Date.now() + '-' +file.originalname )
+  cb(null,req.fileName+file.originalname )
 }
 })
 app.listen(8000, function() {
