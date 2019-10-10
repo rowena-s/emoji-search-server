@@ -2,6 +2,8 @@ var express = require('express');
 var app = express();
 var multer = require('multer')
 var cors = require('cors');
+var sqlite3 = require('sqlite3');
+var db = new sqlite3.Database('db/emojis.db');
 
 app.use(cors())
 
@@ -20,9 +22,11 @@ app.listen(8000, function() {
 });
 
 var upload = multer({ storage: storage }).single('file')
-
+app.get('/', function(req, res){
+  res.send("Hello, world");
+})
 app.post('/upload',function(req, res) {
-   console.log("Called the upoad route");  
+   console.log("Called the upload route");  
   upload(req, res, function (err) {
          if (err instanceof multer.MulterError) {
              return res.status(500).json(err)
